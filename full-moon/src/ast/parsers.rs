@@ -2173,7 +2173,7 @@ define_parser!(ParseBinOp, BinOp, |_, state| {
         // Lua 5.3 special case. If we find another Symbol::GreaterThan, merge them together into a DoubleGreaterThan
         // We can't do this in the tokenizer since it collides with Luau generics for Array<Array<number>>
         // We must ensure there is no whitespace in between the two symbols
-        #[cfg(feature = "lua53")]
+        #[cfg(any(feature = "lua53", feature = "roblox"))]
         if operator.trailing_trivia().next().is_none() {
             if let Ok((state, operator2)) = ParseSymbol(Symbol::GreaterThan).parse(state) {
                 let merged_token = Token {
@@ -2220,7 +2220,7 @@ define_parser!(ParseBinOp, BinOp, |_, state| {
         Ok((state, BinOp::TwoEqual(operator)))
     } else {
         // Lua 5.3
-        #[cfg(feature = "lua53")]
+        #[cfg(any(feature = "roblox", feature = "lua53"))]
         if let Ok((state, operator)) = ParseSymbol(Symbol::Ampersand).parse(state) {
             return Ok((state, BinOp::Ampersand(operator)));
         } else if let Ok((state, operator)) = ParseSymbol(Symbol::DoubleSlash).parse(state) {
@@ -2242,7 +2242,7 @@ make_op_parser!(UnOp, ParseUnOp,
         Minus,
         Not,
         Hash,
-        #[cfg(feature = "lua53")]
+        #[cfg(any(feature = "lua53", feature = "roblox"))]
         Tilde,
     }
 );

@@ -114,7 +114,6 @@ pub enum Symbol {
     #[cfg_attr(feature = "serde", serde(rename = ">"))]
     GreaterThan,
 
-    #[cfg(feature = "lua53")]
     #[cfg_attr(feature = "serde", serde(rename = ">>"))]
     DoubleGreaterThan,
 
@@ -136,7 +135,7 @@ pub enum Symbol {
     #[cfg_attr(feature = "serde", serde(rename = "<"))]
     LessThan,
 
-    #[cfg(feature = "lua53")]
+    #[cfg(any(feature = "roblox", feature = "lua53"))]
     #[cfg_attr(feature = "serde", serde(rename = "<<"))]
     DoubleLessThan,
 
@@ -172,14 +171,12 @@ pub enum Symbol {
     #[cfg_attr(feature = "serde", serde(rename = "/"))]
     Slash,
 
-    #[cfg(feature = "lua53")]
     #[cfg_attr(feature = "serde", serde(rename = "//"))]
     DoubleSlash,
 
     #[cfg_attr(feature = "serde", serde(rename = "*"))]
     Star,
 
-    #[cfg(feature = "lua53")]
     #[cfg_attr(feature = "serde", serde(rename = "~"))]
     Tilde,
 
@@ -251,7 +248,6 @@ impl TryFrom<Atom> for Symbol {
             Atom::LeftParen => Symbol::LeftParen,
             Atom::LessThanEqual => Symbol::LessThanEqual,
             Atom::LessThan => Symbol::LessThan,
-            #[cfg(feature = "lua53")]
             Atom::DoubleLessThan => Symbol::DoubleLessThan,
             Atom::Minus => Symbol::Minus,
             Atom::Percent => Symbol::Percent,
@@ -265,10 +261,8 @@ impl TryFrom<Atom> for Symbol {
             Atom::RightParen => Symbol::RightParen,
             Atom::Semicolon => Symbol::Semicolon,
             Atom::Slash => Symbol::Slash,
-            #[cfg(feature = "lua53")]
             Atom::DoubleSlash => Symbol::DoubleSlash,
             Atom::Star => Symbol::Star,
-            #[cfg(feature = "lua53")]
             Atom::Tilde => Symbol::Tilde,
             Atom::TildeEqual => Symbol::TildeEqual,
             _ => {
@@ -327,7 +321,7 @@ impl Display for Symbol {
             Symbol::Equal => "=",
             Symbol::GreaterThanEqual => ">=",
             Symbol::GreaterThan => ">",
-            #[cfg(feature = "lua53")]
+            #[cfg(any(feature = "roblox", feature = "lua53"))]
             Symbol::DoubleGreaterThan => ">>",
             Symbol::Hash => "#",
             Symbol::LeftBracket => "[",
@@ -335,7 +329,7 @@ impl Display for Symbol {
             Symbol::LeftParen => "(",
             Symbol::LessThanEqual => "<=",
             Symbol::LessThan => "<",
-            #[cfg(feature = "lua53")]
+            #[cfg(any(feature = "roblox", feature = "lua53"))]
             Symbol::DoubleLessThan => "<<",
             Symbol::Minus => "-",
             Symbol::Percent => "%",
@@ -349,10 +343,8 @@ impl Display for Symbol {
             Symbol::RightParen => ")",
             Symbol::Semicolon => ";",
             Symbol::Slash => "/",
-            #[cfg(feature = "lua53")]
             Symbol::DoubleSlash => "//",
             Symbol::Star => "*",
-            #[cfg(feature = "lua53")]
             Symbol::Tilde => "~",
             Symbol::TildeEqual => "~=",
         };
