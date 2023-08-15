@@ -283,7 +283,7 @@ define_parser!(ParsePartExpression, Expression, |_, state| {
         keep_going!(parse_value(state)).or_else(|_| keep_going!(parse_paren_expression(state)))
     })?;
 
-    #[cfg(feature = "roblox")]
+    #[cfg(not(feature = "roblox"))]
     #[allow(clippy::result_large_err)]
     fn maybe_type_assertion(
         state: ParserState,
@@ -302,7 +302,7 @@ define_parser!(ParsePartExpression, Expression, |_, state| {
         Ok((state, expression))
     }
 
-    #[cfg(not(feature = "roblox"))]
+    #[cfg(feature = "roblox")]
     #[allow(clippy::result_large_err)]
     fn maybe_type_assertion(
         state: ParserState,
@@ -369,7 +369,6 @@ define_roblox_parser!(
             ParseTypeInfo(TypeInfoContext::None).parse(state),
             "expected type in type assertion"
         );
-
         Ok((state, TypeAssertion { assertion_op, cast_to }))
     }
 );
