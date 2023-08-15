@@ -2061,25 +2061,25 @@ impl BinOp {
     }
 
 
-    /// The precedence of the operator, from a scale of 1 to 8. The larger the number, the higher the precedence.
-    /// See more at <http://www.lua.org/manual/5.1/manual.html#2.5.6>
-    #[cfg(any(feature = "lua51", feature = "lua52"))]
-    pub fn precedence(&self) -> u8 {
-        match *self {
-            BinOp::Caret(_) => 8,
-            BinOp::Star(_) | BinOp::Slash(_) | BinOp::Percent(_) => 6,
-            BinOp::Plus(_) | BinOp::Minus(_) => 5,
-            BinOp::TwoDots(_) => 4,
-            BinOp::GreaterThan(_)
-            | BinOp::LessThan(_)
-            | BinOp::GreaterThanEqual(_)
-            | BinOp::LessThanEqual(_)
-            | BinOp::TildeEqual(_)
-            | BinOp::TwoEqual(_) => 3,
-            BinOp::And(_) => 2,
-            BinOp::Or(_) => 1,
-        }
-    }
+    // /// The precedence of the operator, from a scale of 1 to 8. The larger the number, the higher the precedence.
+    // /// See more at <http://www.lua.org/manual/5.1/manual.html#2.5.6>
+    // #[cfg(any(feature = "lua51", feature = "lua52"))]
+    // pub fn precedence(&self) -> u8 {
+    //     match *self {
+    //         BinOp::Caret(_) => 8,
+    //         BinOp::Star(_) | BinOp::Slash(_) | BinOp::Percent(_) => 6,
+    //         BinOp::Plus(_) | BinOp::Minus(_) => 5,
+    //         BinOp::TwoDots(_) => 4,
+    //         BinOp::GreaterThan(_)
+    //         | BinOp::LessThan(_)
+    //         | BinOp::GreaterThanEqual(_)
+    //         | BinOp::LessThanEqual(_)
+    //         | BinOp::TildeEqual(_)
+    //         | BinOp::TwoEqual(_) => 3,
+    //         BinOp::And(_) => 2,
+    //         BinOp::Or(_) => 1,
+    //     }
+    // }
 
     /// Whether the operator is right associative. If not, it is left associative.
     /// See more at <https://www.lua.org/pil/3.5.html>
@@ -2129,10 +2129,10 @@ make_op!(UnOp,
 impl UnOp {
     /// The precedence of the operator, from a scale of 1 to 8. The larger the number, the higher the precedence.
     /// See more at <http://www.lua.org/manual/5.1/manual.html#2.5.6>
-    #[cfg(any(feature = "lua52", feature = "lua51"))]
-    pub fn precedence(&self) -> u8 {
-        7
-    }
+    // #[cfg(any(feature = "lua52", feature = "lua51"))]
+    // pub fn precedence(&self) -> u8 {
+    //     7
+    // }
 
     /// The precedence of the operator, from a scale of 1 to 11. The larger the number, the higher the precedence.
     /// See more at <https://www.lua.org/manual/5.3/manual.html#2.5.6>
